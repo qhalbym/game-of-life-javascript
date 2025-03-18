@@ -1,13 +1,13 @@
 import board from "./board.js";
-import pattern from "./pattern.js";
+import gameInputHandler from "./gameInputHandler.js";
 
-let blinkerPattern = pattern.blinker();
+const startGame = async () => {
+  let { pattern, intervalTime } = await gameInputHandler.getInputData();
 
-const run = () => {
   setInterval(() => {
-    board.showBoard(blinkerPattern);
-    blinkerPattern = board.generateNewBoard(blinkerPattern);
-  }, 200);
+    board.showBoard(pattern);
+    pattern = board.generateNewBoard(pattern);
+  }, intervalTime);
 };
 
-run();
+startGame();
