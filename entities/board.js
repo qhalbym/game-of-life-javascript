@@ -1,30 +1,60 @@
 import Cell from "./cell.js";
 
 class Board {
-  showBoard = (pattern) => {
+  showBoard(pattern) {
     console.clear();
-    console.log(
-      pattern
-        .map((row) => {
-          return row.map((el) => (el === 1 ? "o" : ".")).join(" ");
-        })
-        .join("\n")
+    console.log(this.formatPattern(pattern));
+  }
+
+  generateNewBoard(pattern) {
+    const expandedPattern = this.expandBoard(pattern);
+    const nextGeneration = this.computeNextState(expandedPattern);
+    return this.trimBoard(nextGeneration);
+  }
+
+  expandBoard(pattern) {
+    const width = pattern[0].length;
+
+    return [
+      Array(width + 2).fill(0),
+      ...pattern.map((row) => [0, ...row, 0]),
+      Array(width + 2).fill(0),
+    ];
+  }
+
+  computeNextState(pattern) {
+    return pattern.map((row, i) =>
+      row.map((_, j) => new Cell(pattern, i, j).determineNextState())
     );
-  };
+  }
 
-  generateNewBoard = (pattern) => {
-    let newMap = [];
-    for (let i = 0; i < pattern.length; i++) {
-      const newInnerMap = [];
-      for (let j = 0; j < pattern[i].length; j++) {
-        const cell = new Cell(pattern, i, j, pattern[i][j]);
-        newInnerMap.push(cell.determineNextState());
-      }
-      newMap.push(newInnerMap);
-    }
+  trimBoard(pattern) {
+    return this.trimEmptyColumns(this.trimEmptyRows(pattern));
+  }
 
-    return newMap;
-  };
+  trimEmptyRows(pattern) {
+    return pattern.filter((row) => row.some((cell) => cell !== 0));
+  }
+
+  trimEmptyColumns(pattern) {
+    const hasLiveCell = (colIndex) =>
+      pattern.some((row) => row[colIndex] !== 0);
+    const firstCol = pattern[0].findIndex((_, i) => hasLiveCell(i));
+    const lastCol =
+      pattern[0].length -
+      pattern[0]
+        .slice()
+        .reverse()
+        .findIndex((_, i) => hasLiveCell(pattern[0].length - 1 - i));
+
+    return pattern.map((row) => row.slice(firstCol, lastCol));
+  }
+
+  formatPattern(pattern) {
+    return pattern
+      .map((row) => row.map((cell) => (cell === 1 ? "o" : ".")).join(" "))
+      .join("\n");
+  }
 }
 
 export default new Board();
