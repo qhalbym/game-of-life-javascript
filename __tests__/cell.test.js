@@ -1,4 +1,4 @@
-import Cell from "../cell.js";
+import Cell from "../entities/cell.js";
 
 describe("Cell.countNeighbour", () => {
   test("count live neighbour for a center cell", () => {
