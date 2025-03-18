@@ -3,7 +3,13 @@ import Cell from "./cell.js";
 class Board {
   showBoard = (pattern) => {
     console.clear();
-    console.log(pattern);
+    console.log(
+      pattern
+        .map((row) => {
+          return row.map((el) => (el === 1 ? "o" : ".")).join(" ");
+        })
+        .join("\n")
+    );
   };
 
   generateNewBoard = (pattern) => {
