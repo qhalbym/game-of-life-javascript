@@ -1,5 +1,5 @@
-import board from "./board.js";
-import gameInputHandler from "./gameInputHandler.js";
+import board from "./entities/board.js";
+import gameInputHandler from "./utils/gameInputHandler.js";
 
 const startGame = async () => {
   let { pattern, intervalTime } = await gameInputHandler.getInputData();
