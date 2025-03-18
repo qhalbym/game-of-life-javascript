@@ -1,12 +1,5 @@
 import board from "./board.js";
+import pattern from "./pattern.js";
 
-const pattern = [
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 1, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0],
-];
-
-board.showBoard(pattern);
+const blinkerPattern = pattern.blinker();
+board.showBoard(blinkerPattern);
