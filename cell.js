@@ -19,6 +19,20 @@ class Cell {
     }
     return count;
   };
+
+  determineNextState = () => {
+    let count = this.countNeighbour();
+    if (this.isAlive) {
+      if (count < 2 || count > 3) return 0;
+      return 1;
+    }
+    if (!this.isAlive && count === 3) return 1;
+    return 0;
+  };
+
+  isAlive = () => {
+    return this.map[this.row][this.col] === 1;
+  };
 }
 
 export default Cell;
