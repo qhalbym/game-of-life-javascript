@@ -1,3 +1,5 @@
+import board from "./board.js";
+
 const pattern = [
   [0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0],
@@ -7,9 +9,4 @@ const pattern = [
   [0, 0, 0, 0, 0, 0],
 ];
 
-showBoard(pattern);
-
-function showBoard(pattern) {
-  console.clear();
-  console.log(pattern);
-}
+board.showBoard(pattern);
