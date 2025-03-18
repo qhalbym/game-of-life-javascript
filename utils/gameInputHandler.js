@@ -1,5 +1,5 @@
 import readline from "readline";
-import pattern from "../pattern.js";
+import pattern from "../utils/pattern.js";
 import { DEFAULTS, MESSAGES } from "./constants.js";
 
 class GameInputHandler {
