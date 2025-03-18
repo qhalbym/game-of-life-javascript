@@ -1,5 +1,6 @@
 import readline from "readline";
 import pattern from "./pattern.js";
+import { DEFAULTS, MESSAGES } from "./constants.js";
 
 class GameInputHandler {
   constructor() {
@@ -13,12 +14,12 @@ class GameInputHandler {
     this.showAvailablePattern();
 
     const patternIndex = await this.getUserInput(
-      "Enter pattern number (default: 1): ",
-      "1"
+      MESSAGES.PATTERN_PROMPT,
+      DEFAULTS.PATTERN
     );
     const intervalTime = await this.getUserInput(
-      "Enter interval time in ms (default: 500): ",
-      "500"
+      MESSAGES.INTERVAL_PROMPT,
+      DEFAULTS.INTERVAL
     );
 
     const patternNames = Object.keys(pattern);
@@ -34,7 +35,7 @@ class GameInputHandler {
   }
 
   showAvailablePattern() {
-    console.log("\nAvailable Patterns:");
+    console.log(MESSAGES.AVAILABLE_PATTERNS);
     Object.keys(pattern).forEach((name, index) => {
       console.log(`${index + 1}. ${name}`);
     });
